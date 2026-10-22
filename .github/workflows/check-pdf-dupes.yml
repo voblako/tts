@@ -1,0 +1,22 @@
+# .github/workflows/check-pdf-dupes.yml
+name: Check PDF duplicates for PPTX
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  check-pdf-dupes:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Fish
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes fish
+
+      - name: Find PPTX files without PDF duplicate
+        run: fish .github/workflows/check_pptx_pdfs.fish
